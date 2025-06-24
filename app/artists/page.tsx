@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import ArtistCard from "@/components/ArtistCard";
 import FilterBlock from "@/components/FilterBlock";
 import {
@@ -13,17 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function ArtistsPage() {
-  const searchParams = useSearchParams();
-
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
-
-  // ✅ Sync category from query param on first load
-  useEffect(() => {
-    const initialCategory = searchParams.get("category");
-    if (initialCategory) setCategory(initialCategory);
-  }, [searchParams]);
 
   const clearFilters = () => {
     setCategory("");
@@ -74,7 +65,7 @@ export default function ArtistsPage() {
         )}
       </div>
 
-      {/* Artists Grid */}
+      {/* Artist Cards */}
       {filtered.length === 0 ? (
         <p className="text-center text-gray-500">No artists match your filter.</p>
       ) : (
